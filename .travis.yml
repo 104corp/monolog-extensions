@@ -24,6 +24,7 @@ install:
 - composer install --prefer-dist
 
 script:
+- php vendor/bin/phpcs
 - php vendor/bin/phpunit
 
 cache:
