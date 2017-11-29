@@ -24,7 +24,7 @@ install:
 - composer install --prefer-dist
 
 script:
-- exit 0
+- php vendor/bin/phpunit
 
 cache:
   directories:
