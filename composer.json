@@ -1,0 +1,13 @@
+{
+  "name": "104corp/monolog-handler",
+  "description": "The handlers for monolog",
+  "type": "library",
+  "license": "BSD-3-Clause",
+  "require": {
+    "php": ">=7",
+    "monolog/monolog": "1.*"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
