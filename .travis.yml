@@ -17,7 +17,6 @@ branches:
   only:
   - master
   - /^\d+\.x$/
-  - /^\d+\.\d+$/
   - /^\d+\.\d+\.\d+$/
 
 install:
@@ -32,3 +31,11 @@ cache:
   # See https://blog.wyrihaximus.net/2015/07/composer-cache-on-travis/
   - $HOME/.composer/cache/files
   - vendor
+
+notifications:
+  email: false
+  slack:
+    on_success: change
+    on_failure: always
+    rooms:
+    - secure: GMZHMuackvOJg7k5nCsqk0eouISu1hYmqxpA/VsjlfzJ98gyNTsyK/7m3vJ1Aitw/rhGSveG6bFruoqXZFPf9x2hdYfsC+xUMO0zqWH81BINRmQ9Fk3he9422M2F4+YNvC+Mh5/w/OEiuwjvLenzN5tacCRW10UHnqCwsbHHT9ZMSkLK2zEN5Jcf4kTjunUsJOkZ4R4DfiyIgFefO7MHiitmUDXP7knb+gOY7mHkg/nIHkY6cjWoIEoRnnakFgceiX03geV8PidHzDP5LfLxiuzAq++0utGHy7BQZbBs13DXg0i3+yftI9egP0lv5EMEAuvhH7dW8eOIfOLQxgkEv4RvjMS8CQYBcLtfbT14rUzfdq6raxNJSua9FsYsNegizpGGP0Cll2WazZmWWH5PlmQ6ZI8/W4CMASxVYoSLlqqjCDg/5Rm62znET0DXp8jTQjmdU3G0+cTGpkDUlX2dSMbdp99FXIVJRmloMr1h8BZasVC1pjsnAazNQ7b24MclSkUkMjn3IPNVoR/rdgRuOpcsvhm4QCuOGwrrYEV6pJlPklTCIdGHxSlLUNt2jj3LsxdY/8peJg6NMDNvmDWOVfcP0zsKYZJJWRvSJjYt8z34g5mw9Lkh4zf94Wjr5tn9R7x+RnlXD4XLSgDxtT1QP5MMOh0/6cCmRL7M/RqYtEs=
