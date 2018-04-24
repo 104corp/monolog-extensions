@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Coding standard">
-    <description>Coding standard</description>
-
+<ruleset>
     <!-- display progress and sniff -->
     <arg value="p"/>
     <arg value="s"/>

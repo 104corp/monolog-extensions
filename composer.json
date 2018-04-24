@@ -1,29 +1,29 @@
 {
-  "name": "104corp/monolog-handler",
-  "description": "The handlers for monolog",
-  "type": "library",
-  "license": "BSD-3-Clause",
-  "require": {
-    "php": ">=7",
-    "104corp/support": "^1.0",
-    "monolog/monolog": "1.*"
-  },
-  "require-dev": {
-    "guzzlehttp/guzzle": "^6.3",
-    "phpunit/phpunit": "^6.4",
-    "squizlabs/php_codesniffer": "^3.1"
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "autoload": {
-    "psr-4": {
-      "Corp104\\Monolog\\": "src/Monolog"
+    "name": "104corp/monolog-extensions",
+    "description": "The extensions for monolog",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.5",
+        "104corp/support": "^1.0",
+        "monolog/monolog": "1.*"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": ">4.8 <6",
+        "squizlabs/php_codesniffer": "^3.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Corp104\\Monolog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests"
-    }
-  }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Corp104\Monolog;
+namespace Corp104\Monolog\Handlers;
 
 use Corp104\Support\GuzzleClientAwareInterface;
 use GuzzleHttp\Client;
@@ -12,7 +12,7 @@ use Monolog\Logger;
 /**
  * Proxyable slack webhook handler
  */
-class SlackWebhookHandler extends BaseSlackWebhookHandler implements GuzzleClientAwareInterface
+class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements GuzzleClientAwareInterface
 {
     /**
      * @var Client
@@ -35,7 +35,7 @@ class SlackWebhookHandler extends BaseSlackWebhookHandler implements GuzzleClien
      * @param string $body
      * @return Request
      */
-    protected function createGuzzleRequest($uri, array $header, $body): Request
+    protected function createGuzzleRequest($uri, array $header, $body)
     {
         return new Request('POST', $uri, $header, $body);
     }
