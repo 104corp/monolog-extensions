@@ -88,11 +88,12 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
         $postData = $this->getSlackRecord()->getSlackData($record);
         $postString = json_encode($postData);
 
-        if (null === $this->httpClient) {
-            $this->sendByCurl($postString);
+        if (null !== $this->httpClient) {
+            $this->sendByGuzzleHttp($postString);
+            return;
         }
 
-        $this->sendByGuzzleHttp($postString);
+        $this->sendByCurl($postString);
     }
 
     public function __construct(
