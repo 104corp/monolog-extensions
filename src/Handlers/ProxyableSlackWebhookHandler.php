@@ -26,6 +26,34 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
      */
     protected $customWebhookUrl;
 
+    public function __construct(
+        $webhookUrl,
+        $channel = null,
+        $username = null,
+        $useAttachment = true,
+        $iconEmoji = null,
+        $useShortAttachment = false,
+        $includeContextAndExtra = false,
+        $level = Logger::CRITICAL,
+        $bubble = true,
+        array $excludeFields = []
+    ) {
+        parent::__construct(
+            $webhookUrl,
+            $channel,
+            $username,
+            $useAttachment,
+            $iconEmoji,
+            $useShortAttachment,
+            $includeContextAndExtra,
+            $level,
+            $bubble,
+            $excludeFields
+        );
+
+        $this->customWebhookUrl = $webhookUrl;
+    }
+
     /**
      * Using curl to send request
      *
@@ -79,52 +107,6 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
     }
 
     /**
-     * Overload for custom option of sending request
-     *
-     * @param array $record
-     */
-    protected function write(array $record)
-    {
-        $postData = $this->getSlackRecord()->getSlackData($record);
-        $postString = json_encode($postData);
-
-        if (null !== $this->httpClient) {
-            $this->sendByGuzzleHttp($postString);
-            return;
-        }
-
-        $this->sendByCurl($postString);
-    }
-
-    public function __construct(
-        $webhookUrl,
-        $channel = null,
-        $username = null,
-        $useAttachment = true,
-        $iconEmoji = null,
-        $useShortAttachment = false,
-        $includeContextAndExtra = false,
-        $level = Logger::CRITICAL,
-        $bubble = true,
-        array $excludeFields = []
-    ) {
-        parent::__construct(
-            $webhookUrl,
-            $channel,
-            $username,
-            $useAttachment,
-            $iconEmoji,
-            $useShortAttachment,
-            $includeContextAndExtra,
-            $level,
-            $bubble,
-            $excludeFields
-        );
-
-        $this->customWebhookUrl = $webhookUrl;
-    }
-
-    /**
      * @param null|string $proxy
      */
     public function setProxy($proxy)
@@ -141,5 +123,23 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
     protected function createGuzzleRequest($uri, array $header, $body)
     {
         return new Request('POST', $uri, $header, $body);
+    }
+
+    /**
+     * Overload for custom option of sending request
+     *
+     * @param array $record
+     */
+    protected function write(array $record)
+    {
+        $postData = $this->getSlackRecord()->getSlackData($record);
+        $postString = json_encode($postData);
+
+        if (null !== $this->httpClient) {
+            $this->sendByGuzzleHttp($postString);
+            return;
+        }
+
+        $this->sendByCurl($postString);
     }
 }
