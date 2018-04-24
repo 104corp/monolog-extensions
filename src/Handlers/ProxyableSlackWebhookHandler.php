@@ -3,7 +3,7 @@
 namespace Corp104\Monolog\Handlers;
 
 use Corp104\Support\GuzzleClientAwareInterface;
-use GuzzleHttp\Client;
+use Corp104\Support\GuzzleClientAwareTrait;
 use GuzzleHttp\Psr7\Request;
 use Monolog\Handler\Curl\Util;
 use Monolog\Handler\SlackWebhookHandler as BaseSlackWebhookHandler;
@@ -14,10 +14,7 @@ use Monolog\Logger;
  */
 class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements GuzzleClientAwareInterface
 {
-    /**
-     * @var Client
-     */
-    protected $client;
+    use GuzzleClientAwareTrait;
 
     /**
      * @var string
@@ -28,17 +25,6 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
      * @var string
      */
     protected $customWebhookUrl;
-
-    /**
-     * @param string $uri
-     * @param array $header
-     * @param string $body
-     * @return Request
-     */
-    protected function createGuzzleRequest($uri, array $header, $body)
-    {
-        return new Request('POST', $uri, $header, $body);
-    }
 
     /**
      * Using curl to send request
@@ -83,15 +69,13 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
             $postString
         );
 
-        $options = [
-            'timeout' => 3,
-        ];
+        $options = $this->httpOptions;
 
         if (null !== $this->proxy) {
             $options['proxy'] = $this->proxy;
         }
 
-        $this->client->send($request, $options);
+        $this->httpClient->send($request, $options);
     }
 
     /**
@@ -104,7 +88,7 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
         $postData = $this->getSlackRecord()->getSlackData($record);
         $postString = json_encode($postData);
 
-        if (null === $this->client) {
+        if (null === $this->httpClient) {
             $this->sendByCurl($postString);
         }
 
@@ -140,18 +124,21 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
     }
 
     /**
-     * @param Client $client
-     */
-    public function setHttpClient(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
      * @param null|string $proxy
      */
     public function setProxy($proxy)
     {
         $this->proxy = $proxy;
+    }
+
+    /**
+     * @param string $uri
+     * @param array $header
+     * @param string $body
+     * @return Request
+     */
+    protected function createGuzzleRequest($uri, array $header, $body)
+    {
+        return new Request('POST', $uri, $header, $body);
     }
 }

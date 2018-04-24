@@ -5,7 +5,7 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": ">=5.5",
-        "104corp/support": "^1.0",
+        "104corp/support": "^1.2",
         "monolog/monolog": "1.*"
     },
     "require-dev": {
