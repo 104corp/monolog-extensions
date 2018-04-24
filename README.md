@@ -1,6 +1,6 @@
 # Monolog Handlers
 
-[![Build Status](https://travis-ci.org/104corp/php-monolog-handler.svg?branch=master)](https://travis-ci.org/104corp/php-monolog-handler)
+[![Build Status](https://travis-ci.org/104corp/monolog-extensions.svg?branch=master)](https://travis-ci.org/104corp/monolog-extensions)
 
 Include handlers for [Monolog].
 
