@@ -7,7 +7,6 @@ use Corp104\Support\GuzzleClientAwareTrait;
 use GuzzleHttp\Psr7\Request;
 use Monolog\Handler\Curl\Util;
 use Monolog\Handler\SlackWebhookHandler as BaseSlackWebhookHandler;
-use Monolog\Logger;
 
 /**
  * Proxyable slack webhook handler
@@ -22,39 +21,6 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
     protected $proxy;
 
     /**
-     * @var string
-     */
-    protected $customWebhookUrl;
-
-    public function __construct(
-        $webhookUrl,
-        $channel = null,
-        $username = null,
-        $useAttachment = true,
-        $iconEmoji = null,
-        $useShortAttachment = false,
-        $includeContextAndExtra = false,
-        $level = Logger::CRITICAL,
-        $bubble = true,
-        array $excludeFields = []
-    ) {
-        parent::__construct(
-            $webhookUrl,
-            $channel,
-            $username,
-            $useAttachment,
-            $iconEmoji,
-            $useShortAttachment,
-            $includeContextAndExtra,
-            $level,
-            $bubble,
-            $excludeFields
-        );
-
-        $this->customWebhookUrl = $webhookUrl;
-    }
-
-    /**
      * Using curl to send request
      *
      * @param $postString
@@ -64,7 +30,7 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
         $ch = curl_init();
 
         $options = [
-            CURLOPT_URL => $this->customWebhookUrl,
+            CURLOPT_URL => $this->getWebhookUrl(),
             CURLOPT_POST => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => ['Content-type: application/json'],
@@ -92,7 +58,7 @@ class ProxyableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
     public function sendByGuzzleHttp($postString)
     {
         $request = $this->createGuzzleRequest(
-            $this->customWebhookUrl,
+            $this->getWebhookUrl(),
             ['Content-type' => 'application/json'],
             $postString
         );
