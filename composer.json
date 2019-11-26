@@ -12,11 +12,8 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3",
-        "phpunit/phpunit": ">4.8 <6",
+        "phpunit/phpunit": "^4 | ^5 | ^6",
         "squizlabs/php_codesniffer": "^3.1"
-    },
-    "config": {
-        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -27,5 +24,8 @@
         "psr-4": {
             "Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

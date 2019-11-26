@@ -33,5 +33,4 @@ Desktop.ini
 /composer.phar
 
 # Build files
-/.dapper
 /build
