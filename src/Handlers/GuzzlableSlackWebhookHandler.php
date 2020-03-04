@@ -10,6 +10,8 @@ use Monolog\Handler\SlackWebhookHandler as BaseSlackWebhookHandler;
 
 /**
  * Guzzlable slack webhook handler
+ *
+ * @deprecated Use Psr18SlackWebhookHandler
  */
 class GuzzlableSlackWebhookHandler extends BaseSlackWebhookHandler implements GuzzleClientAwareInterface
 {
