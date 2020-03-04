@@ -12,14 +12,14 @@ class GuzzlableSlackWebhookHandlerTest extends TestCase
      */
     protected $target;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->target = new GuzzlableSlackWebhookHandler('some-url');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->target = null;
 
@@ -29,7 +29,7 @@ class GuzzlableSlackWebhookHandlerTest extends TestCase
     /**
      * @test
      */
-    public function shouldPass()
+    public function shouldPass(): void
     {
         $this->assertInstanceOf(GuzzlableSlackWebhookHandler::class, $this->target);
     }

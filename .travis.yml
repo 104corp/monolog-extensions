@@ -2,17 +2,9 @@ dist: trusty
 language: php
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
   - 7.2
   - 7.3
-  - nightly
-
-matrix:
-  allow_failures:
-    - php: nightly
+  - 7.4
 
 branches:
   only:
@@ -27,7 +19,7 @@ script:
   - make test
 
 after_success:
-  - if [[ "7.3" == "${TRAVIS_PHP_VERSION}" ]]; then bash <(curl -s https://codecov.io/bash) ; fi
+  - if [[ "7.4" == "${TRAVIS_PHP_VERSION}" ]]; then bash <(curl -s https://codecov.io/bash) ; fi
 
 cache:
   directories:

@@ -20,7 +20,7 @@ class GuzzlableSlackWebhookHandler extends BaseSlackWebhookHandler implements Gu
      *
      * @param array $record
      */
-    protected function write(array $record)
+    protected function write(array $record): void
     {
         $postData = $this->getSlackRecord()->getSlackData($record);
         $postString = json_encode($postData);
